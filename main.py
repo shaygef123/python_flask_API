@@ -2,6 +2,9 @@ import boto3
 import botocore
 from flask import Flask, request
 
+ACCESS_KEY = os.getenv("ACCESS_KEY")
+SECRET_KEY = os.getenv("SECRET_ACCESS_KEY")
+
 def Test_data(info):
     info = str(info)[1:-1]
     list_of_error_chars = ['<','>','{','}','$','=','/',chr(92)] ## chr(92) is '\'
@@ -10,7 +13,7 @@ def Test_data(info):
             return False
     return True
 
-s3 = boto3.resource('s3')
+s3 = boto3.resource('s3',aws_access_key_id=ACCESS_KEY,aws_secret_access_key=SECRET_KEY)
 obj = s3.Object('shaygefbucket','data.json')
 app = Flask(__name__)
 @app.route('/api/endpoint1', methods=["POST"])
