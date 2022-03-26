@@ -1,5 +1,6 @@
 import boto3
 import botocore
+import os
 from flask import Flask, request
 
 ACCESS_KEY = os.getenv("ACCESS_KEY")
